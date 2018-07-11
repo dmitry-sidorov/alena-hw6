@@ -1,6 +1,10 @@
 (function ($) {
     $(document).ready(function () {
-
+      $('section#slideshow').attr('data-offset', 40);
+      $('section#services').attr('data-offset', 60);
+      $('section#portfolio').attr('data-offset', 80);
+      $('section#prices').attr('data-offset', 100);
+      $('section#contacts').attr('data-offset', 120);
         /* Панель навигации */
         // Описываем функцию, которая
         function lpHeader() {
@@ -21,11 +25,14 @@
         lpNav.find('li a').on('click', function (e) {
             // Определяем элемент на странице, на который ссылается ссылка по ID
             var linkTrgt = $($(this).attr('href'));
+            if (linkTrgt.attr('data-offset')) {
+              var dataOffset = linkTrgt.attr('data-offset');
+            } else dataOffset = 44;
             if (linkTrgt.length > 0) { // Если такой элемент присутствует
                 e.preventDefault(); // Отменяем переход по умолчанию
                 var offset = linkTrgt.offset().top; // Определяем отступ целевого элемента от начала документа
                 $('body, html').animate({
-                    scrollTop: offset - 44
+                    scrollTop: offset - dataOffset
                 }, 750); // Плавно скролим документ к этому месту
             }
         });
